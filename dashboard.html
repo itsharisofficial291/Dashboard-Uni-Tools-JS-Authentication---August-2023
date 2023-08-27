@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<style>
+    body{
+        background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');;
+    }
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        color: white;
+     
+    }
+    
+    .lb{
+      padding: 0;
+      display: flex;
+      width: auto;
+    }
+       /* Default height for small devices */
+       #intro-example {
+            height: 400px;
+          }
+      
+          /* Height for devices larger than 992px */
+          @media (min-width: 992px) {
+            #intro-example {
+              height: 600px;
+            }
+          }
+</style>
+<body>
+    <div class="topbar">
+        <h1 id="admin">Dashboard</h1>
+        <div class="lb">
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            
+            <a class="navbar-brand" href="dashboard.html">UniTools</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <input type="button" name="btn" id="logoutbtn" class="btn btn-danger" value="Logout" onclick="logout()">
+
+        </div>
+        
+    </nav>
+
+      
+
+      
+        <!-- Background image -->
+        <div id="intro-example" class="p-5 text-center bg-image"
+        style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');">
+       <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
+           <div class="d-flex justify-content-center align-items-center h-100">
+               <div class="text-white">
+                   <h1 class="mb-4" style="font-size: 3rem; font-weight: bold;">Welcome to Unitools</h1>
+                   <p class="lead mb-5">
+                       Let us introduce you to our powerful tools for a seamless dashboard experience.
+                   </p>
+                   <a class="btn btn-outline-light btn-lg m-2" href="compare.html"
+                      role="button">Compare Table</a>
+                      <a class="btn btn-outline-light btn-lg m-2" href="metercont.html"
+                      role="button">Unit Converter</a>
+                   <a class="btn btn-outline-light btn-lg m-2" href="movieapi.html"
+                      role="button" target="_blank">Movies API</a>
+                   <a class="btn btn-outline-light btn-lg m-2" href="addtocarts.html"
+                      role="button">Add to Cart</a>
+                    <a class="btn btn-outline-light btn-lg m-2" href="todolist.html"
+                      role="button">To Do List</a>
+               </div>
+           </div>
+       </div>
+   </div>
+   
+   
+        <!-- Background image -->
+      </header>
+    
+    
+
+    
+    
+    <script>
+        
+        document.getElementById('admin').innerHTML = "Welcome " +  localStorage.getItem('Username');
+        function logout()
+        {
+            localStorage.clear()
+            window.location.href = "login.html";
+        }
+
+      
+
+    </script>
+</body>
+</html>

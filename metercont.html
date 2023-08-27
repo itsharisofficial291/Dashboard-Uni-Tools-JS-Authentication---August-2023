@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dashboard.html">
+    <link rel="stylesheet" href="login.html">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<style>
+    body{
+        background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');;
+    }
+       .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        color: white;
+       }
+       #logoutbtn{
+        width: 100px;
+       }
+        
+        .converter {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .converter:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+  
+</style>
+<body>
+    <div class="topbar">
+        <h1 id="admin">Dashboard</h1>
+        <div class="lb">
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            
+            <a class="navbar-brand" href="dashboard.html">UniDash</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="compare.html">Compare Table</a></li>
+                    <li class="nav-item"><a class="nav-link" href="metercont.html">Meter Converter</a></li>
+
+                 
+                    <li class="nav-item"><a class="nav-link" href="movieapi.html">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="todolist.html">To Do List</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="addtocarts.html">Add to Cart</a></li>
+                </ul>
+            </div>
+            <input type="button" name="btn" id="logoutbtn" class="btn btn-danger" value="Logout" onclick="logout()">
+
+        </div>    
+    </nav>
+    
+    
+    <div class="converter">
+        <h1>Unit Converter</h1> 
+   
+
+        <label>
+            <input type="number" id="inputValue" placeholder="Enter value">
+            <select id="fromUnit">
+                <option value="meters">Meters</option>
+                <option value="kilometers">Kilometers</option>
+                <option value="centimeters">Centimeters</option>
+                <option value="millimeters">Millimeters</option>
+                <option value="micrometers">Micrometer</option>
+                <option value="nanometers">Nanometers</option>
+                <option value="feet">Feet</option>
+                <option value="yards">Yards</option>
+                <option value="miles">Miles</option>
+            </select>
+            to
+            <select id="toUnit">
+                <option value="meters">Meters</option>
+                <option value="kilometers">Kilometers</option>
+                <option value="centimeters">Centimeters</option>
+                <option value="millimeters">Millimeters</option>
+                <option value="micrometers">Micrometer</option>
+                <option value="nanometers">Nanometers</option>
+                <option value="feet">Feet</option>
+                <option value="yards">Yards</option>
+                <option value="miles">Miles</option>
+            </select>
+        </label>
+        <button onclick="convertUnits()">Convert</button>
+        <p id="result"></p>
+
+    <script>
+           document.getElementById('admin').innerHTML = "Unit Converter" ;
+          function logout()
+          {
+              localStorage.clear()
+              window.location.href = "login.html";
+          }
+          function convertUnits() {
+            const inputValue = parseFloat(document.getElementById("inputValue").value);
+            const fromUnit = document.getElementById("fromUnit").value;
+            const toUnit = document.getElementById("toUnit").value;
+            let resultText = "";
+
+            const conversions = {
+                meters: {
+                    kilometers: inputValue / 1000,
+                    centimeters: inputValue * 100,
+                    millimeters: inputValue * 1000,
+                    feet: inputValue * 3.28084,
+                    yards: inputValue * 1.09361,
+                    miles: inputValue * 0.000621371,
+                },
+                kilometers: {
+                    meters: inputValue * 1000,
+                    centimeters: inputValue * 100000,
+                    millimeters: inputValue * 1000000,
+                    feet: inputValue * 3280.84,
+                    yards: inputValue * 1093.61,
+                    miles: inputValue * 0.621371,
+                },
+                centimeters: {
+                    meters: inputValue / 100,
+                    kilometers: inputValue / 100000,
+                    millimeters: inputValue * 10,
+                    feet: inputValue * 0.0328084,
+                    yards: inputValue * 0.0109361,
+                    miles: inputValue * 6.2137e-6,
+                },
+                millimeters: {
+                    meters: inputValue / 1000,
+                    kilometers: inputValue / 1000000,
+                    centimeters: inputValue / 10,
+                    feet: inputValue * 0.00328084,
+                    yards: inputValue * 0.00109361,
+                    miles: inputValue * 6.2137e-7,
+                },
+                micrometers: {
+        meters: inputValue / 1e6,
+        kilometers: inputValue / 1e9,
+        centimeters: inputValue / 10000,
+        millimeters: inputValue / 1000,
+        nanometers: inputValue * 1000,
+        feet: inputValue * 3.28084e-6,
+        yards: inputValue * 1.09361e-6,
+        miles: inputValue * 6.2137e-10,
+    },
+    nanometers: {
+        meters: inputValue / 1e9,
+        kilometers: inputValue / 1e12,
+        centimeters: inputValue / 1e7,
+        millimeters: inputValue / 1e6,
+        micrometers: inputValue / 1000,
+        feet: inputValue * 3.28084e-9,
+        yards: inputValue * 1.09361e-9,
+        miles: inputValue * 6.2137e-13,
+    },
+                feet: {
+                    meters: inputValue / 3.28084,
+                    kilometers: inputValue / 3280.84,
+                    centimeters: inputValue * 30.48,
+                    millimeters: inputValue * 304.8,
+                    yards: inputValue * 0.333333,
+                    miles: inputValue * 0.000189394,
+                },
+                yards: {
+                    meters: inputValue / 1.09361,
+                    kilometers: inputValue / 1093.61,
+                    centimeters: inputValue * 91.44,
+                    millimeters: inputValue * 914.4,
+                    feet: inputValue * 3,
+                    miles: inputValue * 0.000568182,
+                },
+                miles: {
+                    meters: inputValue / 0.000621371,
+                    kilometers: inputValue / 0.621371,
+                    centimeters: inputValue * 160934,
+                    millimeters: inputValue * 1609340,
+                    feet: inputValue * 5280,
+                    yards: inputValue * 1760,
+                },
+            };
+
+            resultText = `${inputValue} ${fromUnit} is equal to ${conversions[fromUnit][toUnit]} ${toUnit}.`;
+
+            document.getElementById("result").textContent = resultText;
+        }
+</script>
+    
+</body>
+</html>

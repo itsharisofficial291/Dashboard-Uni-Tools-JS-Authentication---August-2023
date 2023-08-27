@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.html">
+    <link rel="stylesheet" href="dashboard.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" id=""></script>
+</head>
+<style>
+    /* Add your custom CSS styles here */
+    body{
+        background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');;
+    }
+
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        color: white;
+     
+    }
+
+    .navbar {
+        margin-bottom: 20px;
+    }
+
+    .moviedetails {
+        padding: 0px;
+       margin: 30%;
+        border: 1px solid #ccc;
+        margin-top: 0px;
+        background-color: rgb(116, 116, 116);
+        color: white;
+        justify-content: center;
+        display:grid;
+        align-items: center;
+        width: auto;
+    }
+    .moviedetails .movied{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .search input[type="text"] {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        flex: 1;
+    }
+
+    .search button {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+
+    #poster {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #logoutbtn {
+        margin-left: 10px;
+    }
+  
+</style>
+<body>
+    <div class="topbar">
+        <h1 id="admin">Movie API</h1>
+        <div class="lb">
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            
+            <a class="navbar-brand" href="dashboard.html">UniDash</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="compare.html">Compare Table</a></li>
+                    <li class="nav-item"><a class="nav-link" href="metercont.html">Meter Converter</a></li>
+
+                 
+                    <li class="nav-item"><a class="nav-link" href="movieapi.html">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="todolist.html">To Do List</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="addtocarts.html">Add to Cart</a></li>
+                </ul>
+            </div>
+            <input type="button" name="btn" id="logoutbtn" class="btn btn-danger" value="Logout" onclick="logout()">
+
+        </div>    
+    </nav>
+
+    <div class="moviedetails">
+        <div class="search">
+            <span>
+                Enter Movie Name:
+                <input type="text" id="movie" placeholder="Search by name">
+                <button type="button" onclick="getapi();">Search</button>
+            </span>
+        </div>
+        <div class="movied">
+            <hr>
+            <h1 id="Title"></h1>
+            <hr>
+            <img src="" alt="" id="poster">
+            <hr>
+            <b id="Writer"></b>
+            <hr>
+            <b id="Year"></b>
+            <hr>
+            <b id="Released"></b>
+            <hr>
+            
+            <div id="Runtime"></div>
+            <hr>
+            <div id="Genre"></div>
+            <hr>
+            <div id="Director"></div>
+            <hr>
+            <b id="Cast"></b>
+            <hr>
+            <p id="Plot"></p>
+            <hr>
+            <div id="Ratings">
+                
+                <ul id="RatingList"></ul>
+            </div>
+            <hr>
+            <div id="Awards"></div>
+          
+            <div id="IMDbInfo"></div>
+            <hr>
+            
+        </div>
+        
+    </div>
+
+    <script>
+        async function getapi() {
+            var s = document.getElementById('movie').value;
+            const url = "http://www.omdbapi.com/?t=" + s + "&apikey=34e61597";
+
+            const response = await fetch(url);
+            var data = await response.json();
+            
+            document.getElementById("Title").innerHTML = `<h2>Name</h2><p>${data.Title}`;
+            document.getElementById("poster").src = `${data.Poster}`;
+            document.getElementById("Writer").innerHTML = `<h3>Writer</h3><p>${data.Writer}`;
+            document.getElementById("Year").innerHTML = `<h3>Year</h3><p>${data.Year}`;
+            document.getElementById("Released").innerHTML = `<h3>Released</h3><p>${data.Released}`;
+            document.getElementById("Cast").innerHTML = `<h3>Cast</h3><p>${data.Actors}`;
+            document.getElementById("Plot").innerHTML = `<h3>Plot</h3><p>${data.Plot}`;
+            document.getElementById("Runtime").innerHTML = `<h3>Runtime</h3><p>${data.Runtime}</p>`;
+            document.getElementById("IMDbInfo").innerHTML = `<h3>IMDb Information</h3>
+                                     <p>IMDb Rating: ${data.imdbRating}</p>
+                                     <p>IMDb Votes: ${data.imdbVotes}</p>
+                                     <p>IMDb ID: ${data.imdbID}</p>`;
+            document.getElementById("Director").innerHTML = `<h3>Director</h3><p>${data.Director}</p>`;
+            document.getElementById("Genre").innerHTML = `<h3>Genre</h3><p>${data.Genre}</p>`;
+
+            // Ratings
+            const ratingList = document.getElementById("RatingList");
+            ratingList.innerHTML = "";
+            data.Ratings.forEach(rating => {
+                const ratingItem = document.createElement("li");
+                ratingItem.innerHTML = `${rating.Source}: ${rating.Value}`;
+                ratingList.appendChild(ratingItem);
+            });
+
+
+        
+
+         
+           
+        }
+    </script>
+</body>
+
+</html>
